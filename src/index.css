@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-gray-900 bg-gray-50;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fade-in {
+    animation-name: fadeIn;
+  }
+  .slide-in-from-bottom-8 {
+    animation-name: slideInFromBottom8;
+  }
+  .slide-in-from-top-2 {
+    animation-name: slideInFromTop2;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideInFromBottom8 {
+    from { transform: translateY(2rem); }
+    to { transform: translateY(0); }
+  }
+  @keyframes slideInFromTop2 {
+    from { transform: translateY(-0.5rem); }
+    to { transform: translateY(0); }
+  }
+}

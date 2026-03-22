@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - SmartStay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #ec4899; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #7f1d1d; }
+        code { background: #f3f4f6; padding: 2px 6px; border-radius: 2px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 SmartStay Debug Page</h1>
+        
+        <div class="status success">
+            ✅ Server is running on http://localhost:5179/
+        </div>
+
+        <h2>Checking App Status:</h2>
+        
+        <div id="status"></div>
+
+        <h2>Troubleshooting:</h2>
+        <ul>
+            <li>Check browser console (F12) for errors</li>
+            <li>Try refreshing the page (Ctrl+F5)</li>
+            <li>Check if root element exists: <code>&lt;div id="root"&gt;&lt;/div&gt;</code></li>
+            <li>Verify React is loading</li>
+        </ul>
+
+        <h2>Direct App Link:</h2>
+        <p><a href="http://localhost:5179/" target="_blank">➜ Open App (http://localhost:5179/)</a></p>
+
+        <h2>API Status:</h2>
+        <button onclick="checkAPI()">Check API Connection</button>
+        <div id="api-result"></div>
+    </div>
+
+    <script>
+        function checkAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = 'Checking API...';
+            
+            // Try to fetch from the main app
+            fetch('http://localhost:5179/')
+                .then(res => res.text())
+                .then(html => {
+                    if (html.includes('root')) {
+                        resultDiv.innerHTML = '<div class="status success">✅ App HTML is being served correctly</div>';
+                    } else {
+                        resultDiv.innerHTML = '<div class="status error">❌ App HTML missing root element</div>';
+                    }
+                })
+                .catch(err => {
+                    resultDiv.innerHTML = `<div class="status error">❌ Error: ${err.message}</div>`;
+                });
+        }
+
+        window.onload = function() {
+            document.getElementById('status').innerHTML = `
+                <div class="status success">✅ Current time: ${new Date().toLocaleString()}</div>
+                <div class="status success">✅ Browser: ${navigator.userAgent.split(' ').pop()}</div>
+            `;
+        };
+    </script>
+</body>
+</html>
