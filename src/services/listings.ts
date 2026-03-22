@@ -1,4 +1,5 @@
 import apiClient from './api';
+import { MOCK_PROPERTIES } from './mockData';
 
 export interface SearchParams {
   placeId?: string;
@@ -68,7 +69,11 @@ export const searchProperties = async (
     // Deep check for upstream pseudo-errors that return 200 OK
     if (response.data && response.data.status === false) {
       if (response.data.message && response.data.message.includes('Rate Limit')) {
-        throw new Error('Rate limit exceeded. Please try again later.');
+        console.warn('Rate limit exceeded. Falling back to mock data.');
+        let properties = [...MOCK_PROPERTIES];
+        if (params?.minPrice) properties = properties.filter(p => p.price !== undefined && p.price >= params.minPrice!);
+        if (params?.maxPrice) properties = properties.filter(p => p.price !== undefined && p.price <= params.maxPrice!);
+        return properties;
       }
       throw new Error(response.data.message || 'Upstream API error occurred.');
     }
@@ -87,9 +92,13 @@ export const searchProperties = async (
     }
 
     return properties;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error searching properties:', error);
-    throw error;
+    console.warn('API error or rate limit exceeded. Falling back to mock data.');
+    let properties = [...MOCK_PROPERTIES];
+    if (params?.minPrice) properties = properties.filter(p => p.price !== undefined && p.price >= params.minPrice!);
+    if (params?.maxPrice) properties = properties.filter(p => p.price !== undefined && p.price <= params.maxPrice!);
+    return properties;
   }
 };
 
@@ -102,8 +111,11 @@ export const getPropertyDetails = async (propertyId: string): Promise<AirbnbProp
       `/property/${propertyId}`
     );
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching property details:', error);
+    console.warn('API error or rate limit exceeded. Falling back to mock data.');
+    const mockProp = MOCK_PROPERTIES.find(p => p.id === propertyId);
+    if (mockProp) return mockProp;
     throw error;
   }
 };
