@@ -27,8 +27,7 @@ export const useFavorites = () => {
         newFavorites = prev.filter(fav => fav.id !== id);
       } else {
         if (typeof idOrProperty === 'string') {
-          // If only ID was passed, we can't add it cleanly without details.
-          // In a real app we'd fetch it, but here we expect the full property when adding.
+        
           console.warn('Cannot add to favorites with only an ID. Full property required.');
           return prev;
         }

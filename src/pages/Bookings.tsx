@@ -38,7 +38,7 @@ const Bookings: React.FC = () => {
             return (
               <div key={booking.id} className={`flex flex-col sm:flex-row bg-white rounded-2xl border ${isCancelled ? 'border-red-100 bg-red-50/30' : 'border-gray-200'} shadow-sm overflow-hidden group`}>
                 
-                {/* Property Image Thumbnail */}
+                
                 <div className="sm:w-64 h-48 sm:h-auto shrink-0 relative overflow-hidden bg-gray-100">
                   <img 
                     src={property?.image || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80'} 

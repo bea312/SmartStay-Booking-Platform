@@ -15,7 +15,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ property }) => {
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleFavorite(property.id);
+    toggleFavorite(property);
   };
 
   return (

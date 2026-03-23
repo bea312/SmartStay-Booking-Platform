@@ -46,9 +46,7 @@ export interface SearchResponse {
   [key: string]: any;
 }
 
-/**
- * Search properties by place ID
- */
+
 export const searchProperties = async (
   placeId: string,
   params?: Partial<SearchParams>

@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-// @ts-ignore
 const API_KEY = import.meta.env.VITE_RAPID_API_KEY;
-// @ts-ignore
+
 const API_HOST = import.meta.env.VITE_RAPID_API_HOST;
-// @ts-ignore
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 if (!API_KEY) {
@@ -21,7 +20,7 @@ export const apiClient: AxiosInstance = axios.create({
   },
 });
 
-// Response interceptor for error handling
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {

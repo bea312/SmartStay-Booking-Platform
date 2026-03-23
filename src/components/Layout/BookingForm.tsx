@@ -100,7 +100,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ property }) => {
           </div>
         </div>
 
-        {/* Guests Input */}
+      
         <div className="p-3 rounded-xl border border-gray-300 bg-white">
           <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1">Guests</label>
           <select 
@@ -114,7 +114,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ property }) => {
           </select>
         </div>
 
-        {/* Submit Button */}
+       
         <button
           type="submit"
           disabled={isSubmitting || !checkIn || !checkOut}
@@ -123,7 +123,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ property }) => {
           {isSubmitting ? 'Confirming...' : (isAuthenticated ? 'Reserve' : 'Log in to Reserve')}
         </button>
 
-        {/* Pricing Breakdown */}
+        
         {days > 0 && (
           <div className="pt-4 space-y-3">
             <p className="text-center text-gray-500 text-sm mb-4">You won't be charged yet</p>

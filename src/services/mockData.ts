@@ -13,7 +13,7 @@ export const MOCK_PROPERTIES: AirbnbProperty[] = [
     bedrooms: 4,
     beds: 5,
     bathrooms: 3,
-    description: 'Experience ultimate luxury in this beautiful villa. Features a stunning infinity pool overlooking the ocean, spacious living areas, and a fully equipped chef\\'s kitchen. Perfect for family vacations or group getaways.',
+    description: "Experience ultimate luxury in this beautiful villa. Features a stunning infinity pool overlooking the ocean, spacious living areas, and a fully equipped chef's kitchen. Perfect for family vacations or group getaways.",
     amenities: ['Pool', 'Wifi', 'Kitchen', 'Free parking', 'Air conditioning', 'Ocean view', 'BBQ grill'],
     location: {
       latitude: 34.0259,
@@ -29,7 +29,7 @@ export const MOCK_PROPERTIES: AirbnbProperty[] = [
   {
     id: 'mock-2',
     name: 'Cozy Downtown Loft with City Skyline Views',
-    picture_url: 'https://images.unsplash.com/photo-1502672260266-1c1de24244ce?auto=format&fit=crop&q=80',
+    picture_url: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80',
     price: 150,
     currency: 'USD',
     rating: 4.8,
@@ -54,7 +54,7 @@ export const MOCK_PROPERTIES: AirbnbProperty[] = [
   {
     id: 'mock-3',
     name: 'Serene Forest Cabin Hideaway',
-    picture_url: 'https://images.unsplash.com/photo-1542314831-c6a4d14b8e88?auto=format&fit=crop&q=80',
+    picture_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80',
     price: 120,
     currency: 'USD',
     rating: 4.95,

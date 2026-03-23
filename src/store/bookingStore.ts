@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Booking } from '../types/index';
+import type { Booking } from '../types/index';
 
 interface BookingStore {
   bookings: Booking[];
