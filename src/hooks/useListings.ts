@@ -1,14 +1,13 @@
-import { useQuery, QueryKey } from '@tanstack/react-query';
-import { searchProperties, getPropertyDetails, normalizeProperty } from '../services/listings';
+import { useQuery, useQueryClient, QueryKey } from '@tanstack/react-query';
+import { searchProperties, getPropertyDetails, normalizeProperty, AirbnbProperty } from '../services/listings';
 
-const QUERY_STALE_TIME = 5 * 60 * 1000; // 5 minutes
-const QUERY_CACHE_TIME = 30 * 60 * 1000; // 30 minutes
+const QUERY_STALE_TIME = 5 * 60 * 1000;
+const QUERY_CACHE_TIME = 30 * 60 * 1000;
 
-/**
- * Hook to fetch listings with caching
- */
 export const useListings = (placeId?: string, params?: Record<string, any>) => {
-  const queryKey: QueryKey = ['listings', placeId, params];
+  // Serialize params so the query key is stable across renders
+  const stableParams = params ? JSON.stringify(params) : null;
+  const queryKey: QueryKey = ['listings', placeId, stableParams];
 
   return useQuery({
     queryKey,
@@ -19,22 +18,30 @@ export const useListings = (placeId?: string, params?: Record<string, any>) => {
     },
     enabled: !!placeId,
     staleTime: QUERY_STALE_TIME,
-    gcTime: QUERY_CACHE_TIME, // renamed from cacheTime in React Query v5
+    gcTime: QUERY_CACHE_TIME,
     retry: 2,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 };
 
-/**
- * Hook to fetch single listing details
- */
 export const useListingDetails = (listingId?: string) => {
+  const queryClient = useQueryClient();
   const queryKey: QueryKey = ['listing', listingId];
 
   return useQuery({
     queryKey,
     queryFn: async () => {
       if (!listingId) throw new Error('Listing ID is required');
+
+      // Try to resolve from any cached listings query first
+      const cachedQueries = queryClient.getQueriesData<AirbnbProperty[]>({ queryKey: ['listings'] });
+      for (const [, data] of cachedQueries) {
+        if (Array.isArray(data)) {
+          const found = data.find((p) => p.id === listingId);
+          if (found) return normalizeProperty(found);
+        }
+      }
+
       const result = await getPropertyDetails(listingId);
       return normalizeProperty(result);
     },

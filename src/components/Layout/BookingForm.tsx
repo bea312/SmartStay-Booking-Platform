@@ -77,36 +77,35 @@ const BookingForm: React.FC<BookingFormProps> = ({ property }) => {
       <form onSubmit={handleBooking} className="space-y-4">
         {/* Date Picker Split Input */}
         <div className="grid grid-cols-2 rounded-xl overflow-hidden border border-gray-300">
-          <div className="p-3 border-r border-gray-300 bg-white">
-            <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1">Check-in</label>
+          <div className="p-3 border-r border-gray-300 bg-gray-50">
+            <label className="block text-[10px] uppercase font-bold text-gray-600 mb-1 tracking-wider">Check-in</label>
             <input 
               type="date" 
               required
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full bg-transparent text-sm focus:outline-none placeholder-gray-400"
+              className="w-full bg-transparent text-sm text-gray-900 focus:outline-none"
             />
           </div>
-          <div className="p-3 bg-white">
-            <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1">Check-out</label>
+          <div className="p-3 bg-gray-50">
+            <label className="block text-[10px] uppercase font-bold text-gray-600 mb-1 tracking-wider">Check-out</label>
             <input 
               type="date" 
               required
               min={checkIn}
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full bg-transparent text-sm focus:outline-none placeholder-gray-400"
+              className="w-full bg-transparent text-sm text-gray-900 focus:outline-none"
             />
           </div>
         </div>
 
-      
-        <div className="p-3 rounded-xl border border-gray-300 bg-white">
-          <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1">Guests</label>
+        <div className="p-3 rounded-xl border border-gray-300 bg-gray-50">
+          <label className="block text-[10px] uppercase font-bold text-gray-600 mb-1 tracking-wider">Guests</label>
           <select 
             value={guests}
             onChange={(e) => setGuests(Number(e.target.value))}
-            className="w-full bg-transparent text-sm focus:outline-none appearance-none cursor-pointer"
+            className="w-full bg-transparent text-sm text-gray-900 focus:outline-none appearance-none cursor-pointer"
           >
             {[1, 2, 3, 4, 5, 6].map(num => (
               <option key={num} value={num}>{num} {num === 1 ? 'guest' : 'guests'}</option>
@@ -118,7 +117,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ property }) => {
         <button
           type="submit"
           disabled={isSubmitting || !checkIn || !checkOut}
-          className="w-full py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all shadow-md shadow-primary-600/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full py-3.5 bg-gray-900 hover:bg-gray-700 text-white font-bold rounded-xl transition-all shadow-md disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm tracking-wide"
         >
           {isSubmitting ? 'Confirming...' : (isAuthenticated ? 'Reserve' : 'Log in to Reserve')}
         </button>

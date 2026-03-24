@@ -27,7 +27,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({ title = 'Oops! Something went w
       {retryHandler && (
         <button
           onClick={retryHandler}
-          className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-semibold rounded-xl text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-all active:scale-95 shadow-sm"
+          className="inline-flex items-center px-6 py-3 text-sm font-bold rounded-xl text-white bg-gray-900 hover:bg-gray-700 transition-all active:scale-95 shadow-sm"
         >
           <RefreshCw className="w-4 h-4 mr-2" />
           Try Again

@@ -20,11 +20,11 @@ const Bookings: React.FC = () => {
       {bookings.length === 0 ? (
         <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
           <div className="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center shadow-sm mb-4">
-            <Calendar className="w-8 h-8 text-gray-400" />
+            <Calendar className="w-8 h-8 text-black" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">No trips booked... yet!</h3>
           <p className="text-gray-500 mb-6">Time to dust off your bags and start planning your next adventure.</p>
-          <a href="/" className="px-6 py-3 bg-gray-900 text-white font-medium rounded-xl hover:bg-gray-800 transition-colors shadow-sm inline-block">
+          <a href="/" className="px-6 py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-700 transition-colors shadow-sm inline-block">
             Start Searching
           </a>
         </div>
@@ -93,9 +93,9 @@ const Bookings: React.FC = () => {
                   {/* Actions */}
                   <div className="flex justify-end gap-3 mt-auto">
                     {isActive && (
-                      <button 
+                      <button
                         onClick={() => cancelBooking(booking.id)}
-                        className="flex items-center gap-2 px-5 py-2.5 text-red-600 font-medium hover:bg-red-50 rounded-xl transition-colors text-sm"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-red-600 text-white font-bold hover:bg-red-700 rounded-xl transition-colors text-sm shadow-sm"
                       >
                         <XCircle className="w-4 h-4" />
                         Cancel Reservation

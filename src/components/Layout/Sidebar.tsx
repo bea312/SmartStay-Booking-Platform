@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
         </h2>
         <button 
           onClick={resetFilters}
-          className="text-sm text-gray-500 hover:text-primary-600 font-medium transition-colors"
+          className="text-sm font-bold text-white bg-gray-700 hover:bg-gray-900 px-3 py-1.5 rounded-lg transition-colors"
         >
           Reset All
         </button>
@@ -53,6 +53,9 @@ const Sidebar: React.FC = () => {
             <option value="1015254">New York, NY</option>
             <option value="1352823">Los Angeles, CA</option>
             <option value="1015252">San Francisco, CA</option>
+            <option value="1015253">Chicago, IL</option>
+            <option value="1015255">Miami, FL</option>
+            <option value="1015256">Las Vegas, NV</option>
           </select>
           <p className="text-xs text-gray-500 mt-2">Required by RapidAPI default configuration</p>
         </div>
@@ -84,17 +87,17 @@ const Sidebar: React.FC = () => {
             <Star className="w-4 h-4 text-gray-400" />
             Guests
           </label>
-          <div className="flex bg-gray-50 rounded-lg p-1 border border-gray-200">
+          <div className="flex bg-gray-100 rounded-xl p-1 border border-gray-200 gap-1">
             {[1, 2, 3, 4, '5+'].map((num) => {
               const value = num === '5+' ? 5 : num;
               return (
                 <button
                   key={num}
                   onClick={() => updateFilter('guests', value)}
-                  className={`flex-1 py-1.5 text-sm font-medium rounded-md transition-all ${
-                    filters.guests === value 
-                      ? 'bg-white shadow border border-gray-200 text-primary-600' 
-                      : 'text-gray-500 hover:text-gray-900'
+                  className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${
+                    filters.guests === value
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'text-gray-700 hover:bg-gray-200 hover:text-gray-900'
                   }`}
                 >
                   {num}

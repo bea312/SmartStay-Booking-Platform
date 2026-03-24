@@ -2,11 +2,22 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home, Search, Heart, User, LogOut, Menu } from 'lucide-react';
 import { useAuthContext } from '../../context/AuthContext';
+import { useFilterContext } from '../../context/FilterContext';
 
 const Navbar: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthContext();
+  const { updateFilter } = useFilterContext();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchInput.trim()) return;
+    // Map free-text to a known placeId or pass as-is; navigate home to trigger refetch
+    updateFilter('location', searchInput.trim());
+    navigate('/');
+  };
 
   const handleLogout = () => {
     logout();
@@ -15,7 +26,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-100 z-40 transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         
         {/* Logo */}
@@ -23,22 +34,24 @@ const Navbar: React.FC = () => {
           <div className="w-8 h-8 bg-primary-600 rounded-xl flex items-center justify-center -rotate-6 shadow-sm">
             <Home className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold tracking-tight hidden sm:block">SmartStay</span>
+          <span className="text-xl font-bold tracking-tight text-gray-900">SmartStay</span>
         </Link>
 
         {/* Search Bar - Center */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
+        <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md mx-8">
           <div className="relative w-full group">
-            <input 
-              type="text" 
-              placeholder="Search destinations..." 
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search destinations..."
               className="w-full h-11 pl-5 pr-12 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all shadow-sm group-hover:shadow-md"
             />
-            <button className="absolute right-1.5 top-1.5 w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition-colors">
+            <button type="submit" className="absolute right-1.5 top-1.5 w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition-colors">
               <Search className="w-4 h-4" />
             </button>
           </div>
-        </div>
+        </form>
 
         {/* Right Nav */}
         <div className="flex items-center gap-4">
@@ -54,10 +67,10 @@ const Navbar: React.FC = () => {
               <div className="relative">
                 <button 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center gap-2 p-1.5 border border-gray-200 rounded-full hover:shadow-md transition-all bg-white"
+                  className="flex items-center gap-2 px-3 py-2 border-2 border-gray-800 rounded-full hover:bg-gray-800 hover:text-white transition-all bg-white text-gray-900 font-medium"
                 >
-                  <Menu className="w-4 h-4 ml-1 text-gray-500" />
-                  <img src={user?.avatar} alt={user?.name} className="w-7 h-7 rounded-full bg-gray-100" />
+                  <Menu className="w-4 h-4" />
+                  <img src={user?.avatar} alt={user?.name} className="w-7 h-7 rounded-full bg-gray-200" />
                 </button>
 
                 {/* Dropdown Menu */}
@@ -83,7 +96,7 @@ const Navbar: React.FC = () => {
           ) : (
             <Link 
               to="/login"
-              className="px-5 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all shadow-sm hover:shadow-md"
+              className="px-5 py-2.5 text-sm font-bold text-white bg-gray-900 hover:bg-gray-700 rounded-full transition-all shadow-sm hover:shadow-md"
             >
               Sign In
             </Link>

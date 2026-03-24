@@ -76,7 +76,7 @@ const Login: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading || !name || !email}
-            className="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all disabled:opacity-50 shadow-md shadow-primary-600/20"
+            className="group relative w-full flex justify-center py-3.5 px-4 text-sm font-bold rounded-xl text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all disabled:opacity-40 shadow-md"
           >
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>

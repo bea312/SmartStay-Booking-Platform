@@ -17,11 +17,11 @@ const Favorites: React.FC = () => {
       {favorites.length === 0 ? (
         <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
           <div className="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center shadow-sm mb-4">
-            <Heart className="w-8 h-8 text-gray-400 stroke-[1.5]" />
+            <Heart className="w-8 h-8 text-black stroke-[1.5]" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">No saved properties</h3>
           <p className="text-gray-500 mb-6 max-w-sm mx-auto">As you search, tap the heart icon to save your favorite places and experiences to a wishlist.</p>
-          <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-medium rounded-xl hover:bg-gray-800 transition-colors shadow-sm">
+          <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-700 transition-colors shadow-sm">
             <Search className="w-4 h-4" />
             Start Exploring
           </Link>
@@ -42,7 +42,7 @@ const Favorites: React.FC = () => {
                     e.stopPropagation();
                     toggleFavorite(property.id);
                   }}
-                  className="absolute top-3 right-3 p-2 rounded-full backdrop-blur-md bg-white/30 hover:bg-white/50 hover:scale-110 transition-all z-10"
+                  className="absolute top-3 right-3 p-2 rounded-full bg-red-500 shadow-md hover:bg-red-600 transition-all z-10 text-white"
                 >
                   <Heart className="w-5 h-5 fill-red-500 text-red-500" />
                 </button>

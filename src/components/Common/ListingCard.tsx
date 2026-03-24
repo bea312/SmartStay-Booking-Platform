@@ -28,37 +28,39 @@ const ListingCard: React.FC<ListingCardProps> = ({ property }) => {
         />
         <button
           onClick={handleFavoriteClick}
-          className="absolute top-3 right-3 p-2 rounded-full backdrop-blur-md bg-white/30 hover:bg-white/50 hover:scale-110 transition-all z-10"
+          className={`absolute top-3 right-3 p-2 rounded-full transition-all z-10 shadow-md ${
+            favorited
+              ? 'bg-white text-black'
+              : 'bg-black/30 hover:bg-black/50 text-white'
+          }`}
         >
-          <Heart 
-            className={`w-5 h-5 transition-colors ${favorited ? 'fill-red-500 text-red-500' : 'text-white'}`} 
-          />
+          <Heart className={`w-5 h-5 transition-colors ${favorited ? 'fill-red-500 text-red-500' : 'text-white'}`} />
         </button>
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1.5 pt-1">
         <div className="flex justify-between items-start gap-2">
-          <h3 className="font-semibold text-gray-900 line-clamp-1 group-hover:text-primary-600 transition-colors">
+          <h3 className="font-semibold text-gray-900 line-clamp-1 group-hover:text-primary-600 transition-colors text-sm">
             {property.name}
           </h3>
-          <div className="flex items-center gap-1 font-medium text-sm text-gray-800 shrink-0">
-            <Star className="w-4 h-4 fill-current" />
-            <span>{property.rating?.toFixed(1) || 'New'}</span>
+          <div className="flex items-center gap-0.5 font-semibold text-sm text-amber-500 shrink-0">
+            <Star className="w-3.5 h-3.5 fill-current" />
+            <span className="text-gray-800">{property.rating?.toFixed(1) || 'New'}</span>
           </div>
         </div>
-        
-        <p className="text-gray-500 text-sm flex items-center gap-1 line-clamp-1">
-          <MapPin className="w-3.5 h-3.5" />
+
+        <p className="text-gray-500 text-xs flex items-center gap-1 line-clamp-1">
+          <MapPin className="w-3 h-3 shrink-0" />
           {property.location?.address || 'Unknown Location'}
         </p>
 
-        <p className="text-gray-500 text-sm capitalize">
-          {property.room_type} · {property.bedrooms} beds
+        <p className="text-gray-400 text-xs capitalize">
+          {property.room_type} · {property.bedrooms} bed{property.bedrooms !== 1 ? 's' : ''}
         </p>
 
-        <div className="mt-2 pt-2 flex items-baseline gap-1">
+        <div className="flex items-baseline gap-1 pt-1">
           <span className="font-bold text-gray-900">${property.price}</span>
-          <span className="text-sm text-gray-500">/{property.currency || 'night'}</span>
+          <span className="text-xs text-gray-500">/ night</span>
         </div>
       </div>
     </Link>

@@ -1,5 +1,5 @@
 import apiClient from './api';
-import { MOCK_PROPERTIES } from './mockData';
+import { MOCK_PROPERTIES, getMockPropertiesForPlace } from './mockData';
 
 export interface SearchParams {
   placeId?: string;
@@ -68,7 +68,7 @@ export const searchProperties = async (
     if (response.data && response.data.status === false) {
       if (response.data.message && response.data.message.includes('Rate Limit')) {
         console.warn('Rate limit exceeded. Falling back to mock data.');
-        let properties = [...MOCK_PROPERTIES];
+        let properties = [...getMockPropertiesForPlace(placeId)];
         if (params?.minPrice) properties = properties.filter(p => p.price !== undefined && p.price >= params.minPrice!);
         if (params?.maxPrice) properties = properties.filter(p => p.price !== undefined && p.price <= params.maxPrice!);
         return properties;
@@ -93,7 +93,7 @@ export const searchProperties = async (
   } catch (error: any) {
     console.error('Error searching properties:', error);
     console.warn('API error or rate limit exceeded. Falling back to mock data.');
-    let properties = [...MOCK_PROPERTIES];
+    let properties = [...getMockPropertiesForPlace(placeId)];
     if (params?.minPrice) properties = properties.filter(p => p.price !== undefined && p.price >= params.minPrice!);
     if (params?.maxPrice) properties = properties.filter(p => p.price !== undefined && p.price <= params.maxPrice!);
     return properties;
