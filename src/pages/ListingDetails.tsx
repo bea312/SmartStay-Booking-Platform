@@ -104,11 +104,11 @@ const ListingDetails: React.FC = () => {
           </div>
 
           {/* Amenities */}
-          {property.amenities?.length > 0 && (
+          {(property.amenities?.length ?? 0) > 0 && (
             <div>
               <h3 className="text-lg font-bold text-gray-900 mb-4">What this place offers</h3>
               <div className="grid grid-cols-2 gap-3">
-                {property.amenities.slice(0, 10).map((amenity: string, idx: number) => (
+                {(property.amenities ?? []).slice(0, 10).map((amenity: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100 text-gray-700 text-sm">
                     <CheckCircle2 className="w-4 h-4 text-primary-500 shrink-0" />
                     <span className="capitalize">{amenity.replace(/_/g, ' ')}</span>
